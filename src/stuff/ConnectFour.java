@@ -48,7 +48,7 @@ public class ConnectFour extends Game
         checkIfGameHasEnded();
     }
     
-    public void isDone()
+    public boolean isDone()
     {
         return done;
     }

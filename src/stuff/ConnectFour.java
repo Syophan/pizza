@@ -16,7 +16,7 @@ public class ConnectFour extends Game
     ConnectFourPlayer winner;
     Player player1, player2;
     boolean done;
-    ConnectFourGameState gameState;
+    int tilesPlaced;
     
     public ConnectFour(Player player1, Player player2)
     {   // Make a new game
@@ -40,7 +40,7 @@ public class ConnectFour extends Game
         assert !done;
         
         // Ask player whose turn it is to make a move
-        turn.makeMove(this.gameState);
+        turn.makeMove();
         
         // Other person's turn
         turn = turn == player1 ? player2 : player1;
@@ -55,41 +55,42 @@ public class ConnectFour extends Game
     
     private void checkIfGameHasEnded()
     {
-        if(gameState.tilesPlaced == 42)
+        if(tilesPlaced == 42)
         {
             this.done = true;
+            winner = (ConnectFourPlayer) player2;
         }
         
-        if(gameState.tilesPlaced > 6) // game needs at least 7 tiles to conclude
+        if(tilesPlaced > 6) // game needs at least 7 tiles to conclude
         {
             // Check rows
-            for(int i = 0; i < gameState.board.length; i++)
+            for(int i = 0; i < board.length; i++)
             {
-                checkLine(gameState.board, i, 0, 0, 1, 7, 6);
+                checkLine(board, i, 0, 0, 1, 7, 6);
             }
             
             // Check columns
-            for(int i = 0; i < gameState.board[0].length; i++)
+            for(int i = 0; i < board[0].length; i++)
             {
-                checkLine(gameState.board, 0, i, 1, 0, 7, 6);
+                checkLine(board, 0, i, 1, 0, 7, 6);
             }
             
             // Check diagonals
             // Starting points are: 
             // For +1/+1 -> [0][2], [0,1], [0,0], [1,0], [2,0], [3,0]
-            checkLine(gameState.board, 0, 2, 1, 1, 7, 6);
-            checkLine(gameState.board, 0, 1, 1, 1, 7, 6);
-            checkLine(gameState.board, 0, 0, 1, 1, 7, 6);
-            checkLine(gameState.board, 1, 0, 1, 1, 7, 6);
-            checkLine(gameState.board, 2, 0, 1, 1, 7, 6);
-            checkLine(gameState.board, 3, 0, 1, 1, 7, 6);
+            checkLine(board, 0, 2, 1, 1, 7, 6);
+            checkLine(board, 0, 1, 1, 1, 7, 6);
+            checkLine(board, 0, 0, 1, 1, 7, 6);
+            checkLine(board, 1, 0, 1, 1, 7, 6);
+            checkLine(board, 2, 0, 1, 1, 7, 6);
+            checkLine(board, 3, 0, 1, 1, 7, 6);
             // For -1/+1 -> [6][2], [6,1], [6,0], [5,0], [4,0], [3,0]
-            checkLine(gameState.board, 6, 2, -1, 1, 7, 6);
-            checkLine(gameState.board, 6, 1, -1, 1, 7, 6);
-            checkLine(gameState.board, 6, 0, -1, 1, 7, 6);
-            checkLine(gameState.board, 5, 0, -1, 1, 7, 6);
-            checkLine(gameState.board, 4, 0, -1, 1, 7, 6);
-            checkLine(gameState.board, 3, 0, -1, 1, 7, 6);
+            checkLine(board, 6, 2, -1, 1, 7, 6);
+            checkLine(board, 6, 1, -1, 1, 7, 6);
+            checkLine(board, 6, 0, -1, 1, 7, 6);
+            checkLine(board, 5, 0, -1, 1, 7, 6);
+            checkLine(board, 4, 0, -1, 1, 7, 6);
+            checkLine(board, 3, 0, -1, 1, 7, 6);
         }
     }
     
@@ -99,7 +100,7 @@ public class ConnectFour extends Game
         ConnectFourPlayer lastOwner = null;
         while(0 <= x && x < xLimit && 0 <= y && y < yLimit)
         {
-            ConnectFourPlayer newOwner = gameState.board[x][y];
+            ConnectFourPlayer newOwner = board[x][y];
             if(newOwner != null && newOwner == lastOwner)
             {
                 if(++tilesInSuccession == 4)
@@ -117,5 +118,13 @@ public class ConnectFour extends Game
             y += yOffset;
         }
         return false;
+    }
+    
+    private void printBoard()
+    {
+        for(int i = 6; i >= 0; i--)
+        {
+            String board = "|" ;
+        }
     }
 }

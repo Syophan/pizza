@@ -25,6 +25,7 @@ public class ConnectFour extends Game
         this.player2 = player2;
         
         turn = player1; // player 1 starts, lel
+        tilesPlaced = 0;
         done = false;
         for(int i = 0; i < board.length; i++)
         {
@@ -33,6 +34,9 @@ public class ConnectFour extends Game
                 board[i][j] = null;
             }
         }
+        
+        player1.setGame(this);
+        player2.setGame(this);
     }
     
     public void doStuff()
@@ -41,6 +45,8 @@ public class ConnectFour extends Game
         
         // Ask player whose turn it is to make a move
         turn.makeMove();
+        tilesPlaced++;
+        printBoard();
         
         // Other person's turn
         turn = turn == player1 ? player2 : player1;
@@ -106,6 +112,7 @@ public class ConnectFour extends Game
                 if(++tilesInSuccession == 4)
                 {
                     winner = lastOwner;
+                    done = true;
                     return true;
                 }
             }
@@ -122,9 +129,29 @@ public class ConnectFour extends Game
     
     private void printBoard()
     {
-        for(int i = 6; i >= 0; i--)
+        System.out.println("Board after move " + tilesPlaced);
+        System.out.println();
+        for(int i = 5; i >= 0; i--)
         {
-            String board = "|" ;
+            String row = "|";
+            for(int j = 0; j < 7; j++)
+            {
+                if(board[j][i] == null)
+                {
+                    row += "  ";
+                }
+                else if(board[j][i] == player1)
+                {
+                    row += " X";
+                }
+                else
+                {
+                    row += " O";
+                }
+            }
+            row += " |";
+            System.out.println(row);
         }
+        System.out.println("---------------");
     }
 }

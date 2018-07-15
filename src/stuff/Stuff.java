@@ -16,6 +16,18 @@ public class Stuff {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        tournament(4);
     }
     
+    
+    public static void tournament(int players)
+    {
+        TournamentOrganizer to = new TournamentOrganizer();
+        Player player1 = new ConnectFourPlayer();
+        Player player2 = new ConnectFourPlayer();
+        Player[] contestants = new Player[] { player1, player2 };
+        
+        to.contestants = contestants;
+        to.playTournament();
+    }
 }

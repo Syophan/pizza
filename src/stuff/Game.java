@@ -11,7 +11,6 @@ package stuff;
  */
 public abstract class Game 
 {
-    GameState gameState;
     Player[] players;
     Player winner;
     

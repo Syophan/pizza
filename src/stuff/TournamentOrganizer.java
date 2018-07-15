@@ -40,7 +40,7 @@ public class TournamentOrganizer
      */
     private Player playGame(Game game)
     {
-        while(!game.isDone)
+        while(!game.isDone())
         {
             game.doStuff();
         }

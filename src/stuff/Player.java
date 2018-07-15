@@ -11,5 +11,6 @@ package stuff;
  */
 public abstract class Player 
 {
-    public abstract void makeMove(GameState g);
+    public abstract void makeMove(); // have player make move
+    public abstract void setGame(Game g); // Assign game to player
 }
